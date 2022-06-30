@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./lib/normalize.css">
+  <link rel="stylesheet" href="./lib/vant@3.min.css">
+  <script src="./lib/vue@3.2.36.js"></script>
+  <script src="./lib/vant@3.min.js"></script>
+  <style>
+    #app,iframe{
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+    #app{
+      padding-bottom: 86px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <iframe src="./page/home.html" frameborder="0"></iframe>
+    <van-grid :column-num="3" style="position: fixed; bottom: 0;left: 0; width: 100%; z-index: 99;">
+      <van-grid-item v-for="value in 3" :key="value" icon="photo-o" text="文字" />
+    </van-grid>
+  </div>
+  <script>
+    Vue.createApp(Vue.defineComponent({
+      setup() {
+        
+      }
+    })).use(vant).mount("#app");
+  </script>
+</body>
+</html>
