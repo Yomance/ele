@@ -1,0 +1,44 @@
+<!-- 地址页面 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../lib/normalize.css">
+  <link rel="stylesheet" href="../lib/normalize.css">
+  <link rel="stylesheet" href="../lib/vant@3.min.css">
+  <script src="../lib/vue@3.2.36.js"></script>
+  <script src="../lib/vant@3.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="header-placeholder" style="height:44px;line-height:44px;padding: 0 12px;">
+      选择收货地址
+    </div>
+    <van-search
+      show-action
+      shape="round"
+      placeholder="请输入你的收货地址"
+      @cancel="onCancel"
+    >
+    <template #left>
+      <span style="font-size: 12px; margin-right: 12px;">请选择 <van-icon name="arrow-down" /></span> 
+    </template>
+  </van-search>
+  </div>
+  <script>
+    Vue.createApp(Vue.defineComponent({
+      setup() {
+        const onCancel = () => {
+          window.location.href = "/index.html";
+        }
+        return{
+          onCancel,
+        }
+      }
+    })).use(vant).mount("#app");
+  </script>
+</body>
+</html>

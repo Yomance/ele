@@ -10,30 +10,65 @@
   <script src="./lib/vue@3.2.36.js"></script>
   <script src="./lib/vant@3.min.js"></script>
   <style>
-    #app,iframe{
-      width: 100%;
-      height: 100%;
-      padding: 0;
-      border: 0;
-      margin: 0;
-      overflow: hidden;
-    }
     #app{
-      padding-bottom: 86px;
+      padding-bottom: 60px;
     }
   </style>
 </head>
 <body>
   <div id="app">
-    <iframe src="./page/home.html" frameborder="0"></iframe>
-    <van-grid :column-num="3" style="position: fixed; bottom: 0;left: 0; width: 100%; z-index: 99;">
-      <van-grid-item v-for="value in 3" :key="value" icon="photo-o" text="文字" />
+    <iframe :src="currentView" frameborder="0"></iframe>
+    <van-grid
+    
+      :icon-size="24"
+     :column-num="3" style="position: fixed; bottom: 0;left: 0; width: 100%; z-index: 99; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);">
+      <van-grid-item
+       v-for="(item, i) in menu"
+        :key="i" :icon="item.icon" 
+        @click="click(item)"
+        :icon-color="currentView == item.key ? 'rgb(2, 182, 253)' : ''"
+        :style="{color:currentView == item.key ? 'rgb(2, 182, 253)' : ''}"
+        :icon-size="20"
+        >
+        <template #text>
+          <span style="line-height: 20px; font-size: 14px;line-height: 20px;">{{item.text}}</span>
+        </template>
+      </van-grid>
     </van-grid>
   </div>
+  <style>
+    .van-grid-item__content{
+      padding: 8px;
+    }
+  </style>
   <script>
     Vue.createApp(Vue.defineComponent({
       setup() {
-        
+        const menu = [
+          {
+            key: './page/home.html',
+            icon:'home-o',
+            text: '首页',
+          },
+          {
+            key: './page/order.html',
+            icon:'orders-o',
+            text: '订单',
+          },
+          {
+            key: './page/me.html',
+            icon:'friends-o',
+            text: '我的',
+          }
+        ]
+        const currentView = Vue.ref("./page/home.html");
+        return{
+          menu,
+          currentView,
+          click(e){
+            currentView.value = e.key;
+          }
+        }
       }
     })).use(vant).mount("#app");
   </script>
